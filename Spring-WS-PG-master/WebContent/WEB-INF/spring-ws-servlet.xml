@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:p="http://www.springframework.org/schema/p" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sws="http://www.springframework.org/schema/web-services"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/web-services http://www.springframework.org/schema/web-services/web-services-2.0.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<context:component-scan base-package="com.gateway" />
+
+	<sws:annotation-driven />
+
+	<sws:dynamic-wsdl id="pg" portTypeName="GatewayResource"
+		locationUri="/gateway/" targetNamespace="http://gateway.com/ws">
+		<sws:xsd location="/WEB-INF/xsd/pg.xsd" />
+	</sws:dynamic-wsdl>
+
+	 <sws:interceptors>
+		<bean id="validatingInterceptor"
+			class="org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor"
+			p:schema="/WEB-INF/xsd/pg.xsd" p:validateRequest="true"
+			p:validateResponse="true" />
+			
+	<!-- 		<bean id="loggingInterceptor" class="org.springframework.ws.server.endpoint.interceptor.PayloadLoggingInterceptor"/>
+			
+			<bean class="org.springframework.ws.soap.security.xwss.XwsSecurityInterceptor">
+		        <property name="policyConfiguration" value="/WEB-INF/securityPolicy.xml"/>
+		        <property name="callbackHandlers">
+		            <list>
+		                <ref bean="callbackHandler"/>
+		            </list>
+		        </property>
+		    </bean> -->		    
+	</sws:interceptors> 
+	
+	<!-- <bean id="callbackHandler" class="org.springframework.ws.soap.security.xwss.callback.SimplePasswordValidationCallbackHandler">
+	    <property name="users">
+	        <props>
+	            <prop key="admin">secret</prop>
+	            <prop key="user">pass</prop>
+	        </props>
+	    </property>
+	</bean> -->
+
+</beans>

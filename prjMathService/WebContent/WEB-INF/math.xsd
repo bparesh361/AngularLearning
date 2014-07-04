@@ -1,0 +1,19 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+xmlns:math="http://cybage.com/math/schemas"
+ elementFormDefault="qualified"
+	targetNamespace="http://cybage.com/math/schemas" >
+	<xs:element name="MathRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="number" type="xs:double"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MathResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="number" type="xs:double"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>	
+</xs:schema>

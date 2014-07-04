@@ -1,0 +1,30 @@
+
+#userinfo {
+	background-color: purple;
+	height: 20px;
+	text-align:right;
+	color:white;
+	padding-left: 20px;
+	
+	}
+	#menubar {
+	width:100%;
+	}
+	ul {
+	list-style-type:none;
+	margin:0;
+	padding:0;
+	width:100%;
+	}
+	li {
+	float:right;
+	}
+	a {
+	display:block;
+	width:60px;	
+	color:purple;
+	text-decoration:none;
+	}
+
+
+

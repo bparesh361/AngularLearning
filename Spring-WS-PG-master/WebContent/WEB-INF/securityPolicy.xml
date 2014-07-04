@@ -1,0 +1,26 @@
+<xwss:SecurityConfiguration xmlns:xwss="http://java.sun.com/xml/ns/xwss/config">    
+    <xwss:RequireUsernameToken passwordDigestRequired="false" nonceRequired="true"/>    
+    <xwss:UsernameToken name="mojo" password="mojopass"
+    		 digestPassword="true" useNonce="true"/>
+</xwss:SecurityConfiguration>
+
+<!--  Sample XML 
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://gateway.com/ws">
+   <soapenv:Header>
+      <wsse:Security soapenv:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+         <wsse:UsernameToken>
+            <wsse:Username>admin</wsse:Username>
+            <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">secret</wsse:Password>
+         </wsse:UsernameToken>
+      </wsse:Security>
+   </soapenv:Header>
+   <soapenv:Body>
+      <ws:AuthRequest>
+         <ws:UserId>?</ws:UserId>
+         <ws:Password>?</ws:Password>
+      </ws:AuthRequest>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+-->

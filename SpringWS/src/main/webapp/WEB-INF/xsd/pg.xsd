@@ -1,0 +1,41 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:pg="http://gateway.com/ws" elementFormDefault="qualified"
+	targetNamespace="http://gateway.com/ws">
+	<xs:element name="AuthRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="UserId" type="xs:string" />
+				<xs:element name="Password" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AuthResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Resp" type="pg:RespType" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="RespType">
+		<xs:sequence>
+			<xs:element name="RespCode" type="xs:short" />
+			<xs:element name="RespMessage" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="RegistrationRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="fname" type="xs:string" />
+				<xs:element name="lname" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RegistrationResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Resp" type="pg:RespType" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,100 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:pg="http://gateway.com/ws" elementFormDefault="qualified"
+	targetNamespace="http://gateway.com/ws">
+	<xs:element name="AuthRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="UserId" type="xs:string" />
+				<xs:element name="Password" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AuthResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Resp" type="pg:RespType" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="RespType">
+		<xs:sequence>
+			<xs:element name="RespCode" type="xs:short" />
+			<xs:element name="RespMessage" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TerminalType">
+		<xs:sequence>
+			<xs:element name="TerminalId" type="xs:string" />
+			<xs:element name="VendorId" type="xs:string" />
+			<xs:element name="FormatId" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CardType">
+		<xs:sequence>
+			<xs:element name="CardNo" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="TransactionType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PAYMENT" />
+			<xs:enumeration value="DEBIT" />
+			<xs:enumeration value="REFUND" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="TerminalRegRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Terminal" type="pg:TerminalType" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="TransactionDetailType">
+		<xs:sequence>
+			<xs:element name="Transaction" type="pg:TransactionType"/>
+			<xs:element name="Amount" type="xs:double" />
+			<xs:element name="TranscationId" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="TerminalRegResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Resp" type="pg:RespType" />
+				<xs:element name="Terminal" type="pg:TerminalType" />
+				<xs:element name="SessionId" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TransactionRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Card" type="pg:CardType" />
+				<xs:element name="Transaction" type="pg:TransactionType" />
+				<xs:element name="SessionId" type="xs:string" />
+				<xs:element name="Amount" type="xs:double" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TransactionResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Resp" type="pg:RespType" />
+				<xs:element name="TranscationId" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GetTransactionDetailRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="CardNo" type="xs:string"/>				
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GetTransactionDetailResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Resp" type="pg:RespType"/>
+				<xs:element name="TransactionDetails" type="pg:TransactionDetailType" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

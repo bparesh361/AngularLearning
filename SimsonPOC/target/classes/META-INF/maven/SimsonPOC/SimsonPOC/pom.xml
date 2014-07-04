@@ -1,0 +1,48 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>SimsonPOC</groupId>
+	<artifactId>SimsonPOC</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<properties>
+		<javasimon.version>3.4.0</javasimon.version>
+	</properties>
+	<!-- Simon Dependency -->
+	<dependencies>
+		<dependency>
+			<groupId>org.javasimon</groupId>
+			<artifactId>javasimon-core</artifactId>
+			<version>${javasimon.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.javasimon</groupId>
+			<artifactId>javasimon-jdbc4</artifactId>
+			<version>${javasimon.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.javasimon</groupId>
+			<artifactId>javasimon-javaee</artifactId>
+			<version>${javasimon.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.javasimon</groupId>
+			<artifactId>javasimon-spring</artifactId>
+			<version>${javasimon.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.javasimon</groupId>
+			<artifactId>javasimon-console-embed</artifactId>
+			<version>${javasimon.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.4</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.9</version>
+		</dependency>
+	</dependencies>
+</project>

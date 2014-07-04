@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project name="Payment Gateway" resourceRoot="" soapui-version="3.6.1" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="GatewayResourceSoap11" type="wsdl" bindingName="{http://gateway.com/ws}GatewayResourceSoap11" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/Spring-WS-PG/pg.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/Spring-WS-PG/pg.wsdl"><con:part><con:url>http://localhost:8080/Spring-WS-PG/pg.wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://gateway.com/ws" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://gateway.com/ws" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://gateway.com/ws">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://gateway.com/ws" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:pg="http://gateway.com/ws">
+      <xs:element name="AuthRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="UserId" type="xs:string"/>
+            <xs:element name="Password" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AuthResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Resp" type="pg:RespType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="RespType">
+        <xs:sequence>
+          <xs:element name="RespCode" type="xs:short"/>
+          <xs:element name="RespMessage" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TerminalType">
+        <xs:sequence>
+          <xs:element name="TerminalId" type="xs:string"/>
+          <xs:element name="VendorId" type="xs:string"/>
+          <xs:element name="FormatId" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CardType">
+        <xs:sequence>
+          <xs:element name="CardNo" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="TransactionType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="PAYMENT"/>
+          <xs:enumeration value="DEBIT"/>
+          <xs:enumeration value="REFUND"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="TerminalRegRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Terminal" type="pg:TerminalType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="TransactionDetailType">
+        <xs:sequence>
+          <xs:element name="Transaction" type="pg:TransactionType"/>
+          <xs:element name="Amount" type="xs:double"/>
+          <xs:element name="TranscationId" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="TerminalRegResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Resp" type="pg:RespType"/>
+            <xs:element name="Terminal" type="pg:TerminalType"/>
+            <xs:element name="SessionId" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="TransactionRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Card" type="pg:CardType"/>
+            <xs:element name="Transaction" type="pg:TransactionType"/>
+            <xs:element name="SessionId" type="xs:string"/>
+            <xs:element name="Amount" type="xs:double"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="TransactionResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Resp" type="pg:RespType"/>
+            <xs:element name="TranscationId" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetTransactionDetailRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="CardNo" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetTransactionDetailResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Resp" type="pg:RespType"/>
+            <xs:element maxOccurs="unbounded" name="TransactionDetails" type="pg:TransactionDetailType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="AuthRequest">
+    <wsdl:part element="tns:AuthRequest" name="AuthRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="TransactionRequest">
+    <wsdl:part element="tns:TransactionRequest" name="TransactionRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AuthResponse">
+    <wsdl:part element="tns:AuthResponse" name="AuthResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="TransactionResponse">
+    <wsdl:part element="tns:TransactionResponse" name="TransactionResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="TerminalRegResponse">
+    <wsdl:part element="tns:TerminalRegResponse" name="TerminalRegResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="TerminalRegRequest">
+    <wsdl:part element="tns:TerminalRegRequest" name="TerminalRegRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetTransactionDetailResponse">
+    <wsdl:part element="tns:GetTransactionDetailResponse" name="GetTransactionDetailResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetTransactionDetailRequest">
+    <wsdl:part element="tns:GetTransactionDetailRequest" name="GetTransactionDetailRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="GatewayResource">
+    <wsdl:operation name="Auth">
+      <wsdl:input message="tns:AuthRequest" name="AuthRequest"></wsdl:input>
+      <wsdl:output message="tns:AuthResponse" name="AuthResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Transaction">
+      <wsdl:input message="tns:TransactionRequest" name="TransactionRequest"></wsdl:input>
+      <wsdl:output message="tns:TransactionResponse" name="TransactionResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TerminalReg">
+      <wsdl:input message="tns:TerminalRegRequest" name="TerminalRegRequest"></wsdl:input>
+      <wsdl:output message="tns:TerminalRegResponse" name="TerminalRegResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionDetail">
+      <wsdl:input message="tns:GetTransactionDetailRequest" name="GetTransactionDetailRequest"></wsdl:input>
+      <wsdl:output message="tns:GetTransactionDetailResponse" name="GetTransactionDetailResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="GatewayResourceSoap11" type="tns:GatewayResource">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="Auth">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="AuthRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="AuthResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Transaction">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="TransactionRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="TransactionResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TerminalReg">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="TerminalRegRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="TerminalRegResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionDetail">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetTransactionDetailRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetTransactionDetailResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GatewayResourceService">
+    <wsdl:port binding="tns:GatewayResourceSoap11" name="GatewayResourceSoap11">
+      <soap:address location="http://localhost:8080/Spring-WS-PG/gateway/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/Spring-WS-PG/gateway/</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="Auth" bindingOperationName="Auth" type="Request-Response" outputName="AuthResponse" inputName="AuthRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/Spring-WS-PG/gateway/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://gateway.com/ws">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:AuthRequest>
+         <ws:UserId>?</ws:UserId>
+         <ws:Password>?</ws:Password>
+      </ws:AuthRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://gateway.com/ws/GatewayResource/AuthRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="TerminalReg" bindingOperationName="TerminalReg" type="Request-Response" outputName="TerminalRegResponse" inputName="TerminalRegRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/Spring-WS-PG/gateway/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://gateway.com/ws">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:TerminalRegRequest>
+         <ws:Terminal>
+            <ws:TerminalId>?</ws:TerminalId>
+            <ws:VendorId>?</ws:VendorId>
+            <ws:FormatId>?</ws:FormatId>
+         </ws:Terminal>
+      </ws:TerminalRegRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://gateway.com/ws/GatewayResource/TerminalRegRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="Transaction" bindingOperationName="Transaction" type="Request-Response" outputName="TransactionResponse" inputName="TransactionRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/Spring-WS-PG/gateway/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://gateway.com/ws">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:TransactionRequest>
+         <ws:Card>
+            <ws:CardNo>?</ws:CardNo>
+         </ws:Card>
+         <ws:Transaction>DEBIT</ws:Transaction>
+         <ws:SessionId>2q42q4-werw-werwr32</ws:SessionId>
+         <ws:Amount>12.32</ws:Amount>
+      </ws:TransactionRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://gateway.com/ws/GatewayResource/TransactionRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="GetTransactionDetail" bindingOperationName="GetTransactionDetail" type="Request-Response" outputName="GetTransactionDetailResponse" inputName="GetTransactionDetailRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/Spring-WS-PG/gateway/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://gateway.com/ws">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:GetTransactionDetailRequest>
+         <ws:CardNo>?</ws:CardNo>
+      </ws:GetTransactionDetailRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://gateway.com/ws/GatewayResource/GetTransactionDetailRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>
